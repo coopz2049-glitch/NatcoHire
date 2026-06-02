@@ -54,6 +54,24 @@
     .aos { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .aos.visible { opacity: 1; transform: translateY(0); }
 
+    /* ABOUT NATHAN */
+    #nathan { background: var(--grey); }
+    .nathan-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .nathan-card { background: var(--black); border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; }
+    .nathan-card::before { content: 'NATHAN'; position: absolute; bottom: -1.5rem; right: -0.5rem; font-size: 5.5rem; font-weight: 900; color: rgba(255,209,0,0.05); letter-spacing: -2px; pointer-events: none; }
+    .nathan-card-title { color: var(--yellow); font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .nathan-detail { display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); color: var(--white); font-size: 0.95rem; }
+    .nathan-detail:last-child { border-bottom: none; }
+    .nathan-dot { width: 7px; height: 7px; background: var(--yellow); border-radius: 50%; flex-shrink: 0; }
+    .nathan-name { font-size: 1.5rem; font-weight: 900; color: var(--white); margin-bottom: 0.25rem; }
+    .nathan-role { color: var(--yellow); font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+    /* DELIVERY BANNER */
+    .delivery-banner { display: flex; align-items: center; gap: 1.2rem; background: #fffbe6; border: 2px solid var(--yellow); border-radius: 8px; padding: 1.1rem 1.4rem; margin-bottom: 2rem; }
+    .delivery-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .delivery-title { font-weight: 800; font-size: 0.97rem; color: var(--black); margin-bottom: 0.15rem; }
+    .delivery-sub { font-size: 0.85rem; color: #666; }
+
     /* ABOUT */
     #about { background: var(--white); }
     .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
@@ -135,7 +153,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .about-inner, .nathan-inner { grid-template-columns: 1fr; gap: 2rem; }
       .reviews-grid { grid-template-columns: 1fr 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -168,7 +186,7 @@
       <div class="hero-tag">Professional Equipment Hire</div>
       <h1>NATCO <span>Machinery</span><br />Equipment &amp; Hire</h1>
       <p class="hero-sub">Reliable machinery and trailer hire for contractors, farmers, and everyday Australians. Quality gear at competitive rates.</p>
-      <p class="hero-location">📍 Koongal, Rockhampton QLD</p>
+      <p class="hero-location">📍 Rockhampton, QLD</p>
       <button class="hero-cta" onclick="goTo(event,'equipment.html')">View All Equipment →</button>
     </div>
     <div class="hero-scroll">SCROLL</div>
@@ -211,10 +229,32 @@
 
   <section id="stats">
     <div class="stats-grid">
-      <div class="aos"><div class="stat-num" data-target="8" data-suffix="+">0</div><div class="stat-label">Years in Business</div></div>
-      <div class="aos" style="transition-delay:0.1s"><div class="stat-num" data-target="6" data-suffix="">0</div><div class="stat-label">Equipment Types</div></div>
-      <div class="aos" style="transition-delay:0.2s"><div class="stat-num" data-target="500" data-suffix="+">0</div><div class="stat-label">Happy Customers</div></div>
+      <div class="aos"><div class="stat-num" data-target="6" data-suffix="">0</div><div class="stat-label">Equipment Types</div></div>
+      <div class="aos" style="transition-delay:0.1s"><div class="stat-num" data-target="50" data-suffix="km">0</div><div class="stat-label">Service Radius</div></div>
+      <div class="aos" style="transition-delay:0.2s"><div class="stat-num" data-target="75" data-suffix="+" data-prefix="$">$0</div><div class="stat-label">Daily Rate From</div></div>
       <div class="aos" style="transition-delay:0.3s"><div class="stat-num" data-target="100" data-suffix="%">0</div><div class="stat-label">Reliable</div></div>
+    </div>
+  </section>
+
+  <!-- ABOUT NATHAN -->
+  <section id="nathan">
+    <div class="nathan-inner">
+      <div class="aos">
+        <div class="section-label">Meet the Owner</div>
+        <h2 class="section-title">Nathan Bujayer</h2>
+        <p class="section-sub">Nathan is a qualified tradesman and plumber based in Rockhampton, QLD. With hands-on experience in the trades, he knows firsthand how essential the right equipment is to getting any job done properly and safely.</p>
+        <p style="color:#555;font-size:0.96rem;line-height:1.7;">NATCO Machinery Equipment &amp; Hire is Nathan's new venture — built on the same work ethic he brings to every job on the tools. His goal is simple: give locals access to quality, well-maintained gear at honest prices, without the headaches. Whether you're a fellow tradie, a farmer, or a homeowner tackling a weekend project, Nathan is here to help you get sorted.</p>
+      </div>
+      <div class="nathan-card aos" style="transition-delay:0.2s">
+        <div class="nathan-card-title">About Nathan</div>
+        <div class="nathan-name">Nathan Bujayer</div>
+        <div class="nathan-role">Owner &amp; Tradesman</div>
+        <div class="nathan-detail"><div class="nathan-dot"></div>Qualified plumber with trade experience</div>
+        <div class="nathan-detail"><div class="nathan-dot"></div>Based in Rockhampton, QLD</div>
+        <div class="nathan-detail"><div class="nathan-dot"></div>Locally owned &amp; operated business</div>
+        <div class="nathan-detail"><div class="nathan-dot"></div>Honest pricing, no hidden fees</div>
+        <div class="nathan-detail"><div class="nathan-dot"></div>Happy to give advice on the right gear</div>
+      </div>
     </div>
   </section>
 
@@ -284,11 +324,16 @@
           </div>
           <div class="contact-detail">
             <div class="contact-icon">📍</div>
-            <div><div class="contact-text-label">Address</div><div class="contact-text-value">309 Rokonia Rd, Koongal QLD 4701</div></div>
+            <div><div class="contact-text-label">Location</div><div class="contact-text-value">Rockhampton, QLD</div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-icon">🚚</div>
+            <div><div class="contact-text-label">Delivery</div><div class="contact-text-value">Available — contact us for pricing</div></div>
           </div>
           <div class="map-wrap">
-            <iframe src="https://maps.google.com/maps?q=309+Rokonia+Rd+Koongal+QLD+4701&output=embed" allowfullscreen loading="lazy"></iframe>
+            <iframe src="https://maps.google.com/maps?q=Rockhampton+QLD+Australia&output=embed&z=9" allowfullscreen loading="lazy"></iframe>
           </div>
+          <p style="font-size:0.78rem;color:#999;margin-top:0.6rem;text-align:center;">Service area: approx. 50km radius from Rockhampton</p>
         </div>
         <form class="aos" style="transition-delay:0.2s">
           <div class="contact-grid">
@@ -320,7 +365,7 @@
     <div class="footer-logo"><span>NATCO</span> Machinery Equipment &amp; Hire</div>
     <div class="footer-div"></div>
     <p>Nathan Bujayer &nbsp;·&nbsp; <a href="tel:0428990169" style="color:#888;text-decoration:none">0428 990 169</a> &nbsp;·&nbsp; <a href="mailto:Nateo007@outlook.com" style="color:#888;text-decoration:none">Nateo007@outlook.com</a></p>
-    <p style="margin-top:0.4rem">309 Rokonia Rd, Koongal QLD 4701</p>
+    <p style="margin-top:0.4rem">Rockhampton, QLD &nbsp;·&nbsp; 50km Service Radius</p>
     <p style="margin-top:1.2rem">&copy; 2026 NATCO Machinery Equipment &amp; Hire. All rights reserved.</p>
   </footer>
 
@@ -339,9 +384,9 @@
         entry.target.classList.add('visible');
         const counter = entry.target.querySelector('[data-target]');
         if (counter) {
-          const target = +counter.dataset.target, suffix = counter.dataset.suffix || '';
+          const target = +counter.dataset.target, suffix = counter.dataset.suffix || '', prefix = counter.dataset.prefix || '';
           let cur = 0; const step = target / 80;
-          const t = setInterval(() => { cur += step; if (cur >= target) { counter.textContent = target + suffix; clearInterval(t); } else { counter.textContent = Math.floor(cur) + suffix; } }, 16);
+          const t = setInterval(() => { cur += step; if (cur >= target) { counter.textContent = prefix + target + suffix; clearInterval(t); } else { counter.textContent = prefix + Math.floor(cur) + suffix; } }, 16);
         }
       });
     }, { threshold: 0.15 });
