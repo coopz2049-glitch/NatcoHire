@@ -20,7 +20,8 @@
     .back-btn { display: inline-flex; align-items: center; gap: 0.4rem; color: #888; font-size: 0.82rem; font-weight: 600; cursor: pointer; margin-bottom: 1.5rem; transition: color 0.2s; border: none; background: none; }
     .back-btn:hover { color: var(--yellow); }
     .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-    .hero-img { background: #161616; border-radius: 10px; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; border: 2px solid #222; }
+    .hero-img { background: #161616; border-radius: 10px; height: 300px; overflow: hidden; border: 2px solid #222; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .hero-img-icon { font-size: 2.5rem; opacity: 0.2; }
     .hero-img-text { color: #555; font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
     .hero-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.5rem; }
@@ -58,7 +59,7 @@
   <section class="product-hero">
     <div style="max-width:1100px;margin:0 auto"><button class="back-btn" onclick="goTo(event,'equipment.html')">← Back to Equipment</button></div>
     <div class="hero-inner">
-      <div class="hero-img"><div class="hero-img-icon">📷</div><div class="hero-img-text">Image Coming Soon</div></div>
+      <div class="hero-img"><img src="roller.jpg" alt="Finishing Roller 2.5 Ton" /></div>
       <div>
         <div class="hero-label">Equipment Hire</div>
         <h1 class="hero-title">Finishing Roller<br />(2.5 Ton)</h1>
