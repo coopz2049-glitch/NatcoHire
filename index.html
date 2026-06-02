@@ -631,6 +631,41 @@
     </div>
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const { createClient } = supabase;
+    const sb = createClient(
+      'https://xqylqfduajkdqpiujecn.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxeWxxZmR1YWprZHFwaXVqZWNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNzI5MzUsImV4cCI6MjA5NTk0ODkzNX0.ulirjyCSVzaNbCnmKW3xN8onmK1Ef7YCrLmg3VwwYjU'
+    );
+
+    document.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.querySelector('.btn-submit');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      const { error } = await sb.from('enquiries').insert({
+        name:      document.getElementById('name').value,
+        phone:     document.getElementById('phone').value,
+        email:     document.getElementById('email').value,
+        equipment: document.getElementById('equipment').value,
+        dates:     document.getElementById('dates').value,
+        message:   document.getElementById('message').value,
+      });
+
+      if (error) {
+        btn.textContent = 'Send Enquiry';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again.');
+      } else {
+        btn.textContent = 'Enquiry Sent!';
+        e.target.reset();
+        setTimeout(() => { btn.textContent = 'Send Enquiry'; btn.disabled = false; }, 3000);
+      }
+    });
+  </script>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo"><span>NATCO</span> Machinery Equipment &amp; Hire</div>
