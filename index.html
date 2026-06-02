@@ -56,7 +56,9 @@
 
     /* ABOUT NATHAN */
     #nathan { background: var(--grey); }
-    .nathan-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .nathan-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr 1fr; gap: 2.5rem; align-items: start; }
+    .nathan-photo { border-radius: 12px; overflow: hidden; height: 420px; }
+    .nathan-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
     .nathan-card { background: var(--black); border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; }
     .nathan-card::before { content: 'NATHAN'; position: absolute; bottom: -1.5rem; right: -0.5rem; font-size: 5.5rem; font-weight: 900; color: rgba(255,209,0,0.05); letter-spacing: -2px; pointer-events: none; }
     .nathan-card-title { color: var(--yellow); font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
@@ -153,7 +155,8 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .about-inner, .nathan-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .nathan-inner { grid-template-columns: 1fr; gap: 2rem; }
       .reviews-grid { grid-template-columns: 1fr 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -244,6 +247,9 @@
         <h2 class="section-title">Nathan Bujayer</h2>
         <p class="section-sub">Nathan is a qualified tradesman and plumber based in Rockhampton, QLD. With hands-on experience in the trades, he knows firsthand how essential the right equipment is to getting any job done properly and safely.</p>
         <p style="color:#555;font-size:0.96rem;line-height:1.7;">NATCO Machinery Equipment &amp; Hire is Nathan's new venture — built on the same work ethic he brings to every job on the tools. His goal is simple: give locals access to quality, well-maintained gear at honest prices, without the headaches. Whether you're a fellow tradie, a farmer, or a homeowner tackling a weekend project, Nathan is here to help you get sorted.</p>
+      </div>
+      <div class="aos" style="transition-delay:0.15s">
+        <div class="nathan-photo"><img src="nathan.jpg" alt="Nathan Bujayer — Owner" /></div>
       </div>
       <div class="nathan-card aos" style="transition-delay:0.2s">
         <div class="nathan-card-title">About Nathan</div>
