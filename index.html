@@ -336,8 +336,83 @@
     #contact { background: var(--white); }
 
     .contact-inner {
-      max-width: 700px;
+      max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .contact-detail-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--yellow);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-detail-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-detail-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .contact-detail-value {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .contact-detail-value a {
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .contact-detail-value a:hover { color: var(--yellow); }
+
+    .map-wrap {
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 3px solid var(--yellow);
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 220px;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .contact-layout { grid-template-columns: 1fr; }
     }
 
     .contact-grid {
@@ -590,7 +665,58 @@
       <h2 class="section-title">Make an Enquiry</h2>
       <p class="section-sub">Fill in the form below and we'll get back to you as soon as possible.</p>
 
-      <form>
+      <div class="contact-layout">
+
+        <!-- Left: contact details + map -->
+        <div class="contact-info">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">👤</div>
+            <div class="contact-detail-text">
+              <span class="contact-detail-label">Owner</span>
+              <span class="contact-detail-value">Nathan Bujayer</span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📞</div>
+            <div class="contact-detail-text">
+              <span class="contact-detail-label">Phone</span>
+              <span class="contact-detail-value"><a href="tel:0428990169">0428 990 169</a></span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉️</div>
+            <div class="contact-detail-text">
+              <span class="contact-detail-label">Email</span>
+              <span class="contact-detail-value"><a href="mailto:Nateo007@outlook.com">Nateo007@outlook.com</a></span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div class="contact-detail-text">
+              <span class="contact-detail-label">Address</span>
+              <span class="contact-detail-value">309 Rokonia Rd, Koongal QLD 4701</span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🏢</div>
+            <div class="contact-detail-text">
+              <span class="contact-detail-label">ABN</span>
+              <span class="contact-detail-value">57 153 756 527</span>
+            </div>
+          </div>
+
+          <div class="map-wrap">
+            <iframe
+              src="https://maps.google.com/maps?q=309+Rokonia+Rd+Koongal+QLD+4701&output=embed"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Right: enquiry form -->
+        <form>
         <div class="contact-grid">
           <div class="form-group">
             <label for="name">Full Name</label>
@@ -627,7 +753,9 @@
           </div>
         </div>
         <button type="submit" class="btn-submit">Send Enquiry</button>
-      </form>
+        </form>
+
+      </div><!-- end contact-layout -->
     </div>
   </section>
 
@@ -670,7 +798,8 @@
   <footer>
     <div class="footer-logo"><span>NATCO</span> Machinery Equipment &amp; Hire</div>
     <div class="footer-divider"></div>
-    <p>Quality equipment hire for every job.</p>
+    <p>Nathan Bujayer &nbsp;·&nbsp; <a href="tel:0428990169" style="color:#888;text-decoration:none;">0428 990 169</a> &nbsp;·&nbsp; <a href="mailto:Nateo007@outlook.com" style="color:#888;text-decoration:none;">Nateo007@outlook.com</a></p>
+    <p style="margin-top:0.4rem;">309 Rokonia Rd, Koongal QLD 4701 &nbsp;·&nbsp; ABN 57 153 756 527</p>
     <p style="margin-top:1.2rem;">&copy; 2026 NATCO Machinery Equipment &amp; Hire. All rights reserved.</p>
   </footer>
 
