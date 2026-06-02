@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipment — NATCO Machinery Equipment & Hire</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --yellow: #FFD100; --black: #111111; --white: #ffffff; --grey: #f5f5f5; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; background: var(--white); animation: pageIn 0.45s ease both; }
+    @keyframes pageIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+    /* NAV */
+    nav { background: var(--black); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; position: sticky; top: 0; z-index: 100; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; cursor: pointer; }
+    .nav-logo-badge { background: var(--yellow); color: var(--black); font-weight: 900; font-size: 1.1rem; padding: 0.25rem 0.55rem; border-radius: 4px; letter-spacing: 1px; }
+    .nav-logo-text { color: var(--white); font-size: 1rem; font-weight: 600; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.9rem; font-weight: 500; position: relative; padding-bottom: 4px; transition: color 0.2s; cursor: pointer; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--yellow); transition: width 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--yellow); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--black); padding: 4.5rem 2rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
+    .header-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,209,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,209,0,0.04) 1px, transparent 1px); background-size: 60px 60px; animation: gridScroll 25s linear infinite; }
+    @keyframes gridScroll { from { transform: translateY(0); } to { transform: translateY(60px); } }
+    .page-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--yellow); }
+    .header-content { position: relative; z-index: 1; animation: slideUp 0.55s ease 0.1s both; }
+    .header-tag { display: inline-block; background: var(--yellow); color: var(--black); font-size: 0.72rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; }
+    .page-header h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: var(--white); margin-bottom: 0.75rem; }
+    .page-header h1 span { color: var(--yellow); }
+    .page-header p { color: #aaa; font-size: 1rem; max-width: 460px; margin: 0 auto; line-height: 1.6; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* GRID */
+    .equip-section { padding: 4rem 2rem; background: var(--grey); }
+    .equip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.6rem; max-width: 1100px; margin: 0 auto; }
+
+    /* CARD */
+    .card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; opacity: 0; transform: translateY(20px); }
+    .card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.14); }
+
+    /* CARD IMAGE — real AI-generated photo */
+    .card-img { height: 220px; position: relative; overflow: hidden; background: var(--black); }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .card:hover .card-img img { transform: scale(1.06); }
+    .card-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%); }
+    .card-price-badge { position: absolute; top: 1rem; right: 1rem; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 0.85rem; padding: 0.3rem 0.75rem; border-radius: 4px; z-index: 2; }
+
+    .card-body { padding: 1.5rem; }
+    .card-name { font-size: 1.15rem; font-weight: 800; color: var(--black); margin-bottom: 0.4rem; }
+    .card-desc { font-size: 0.88rem; color: #666; line-height: 1.5; margin-bottom: 1.1rem; }
+    .card-tags { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .card-tag { background: var(--grey); color: #555; font-size: 0.73rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 2px solid var(--grey); padding-top: 1rem; }
+    .card-footer-text { font-size: 0.85rem; font-weight: 700; color: var(--black); }
+    .card-arrow { width: 32px; height: 32px; background: var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: transform 0.2s; }
+    .card:hover .card-arrow { transform: translateX(3px); }
+
+    /* MODAL */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.78); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }
+    .modal.open { display: flex; }
+    .modal.active { opacity: 1; }
+    .modal-box { background: var(--white); border-radius: 12px; max-width: 680px; width: 100%; max-height: 90vh; overflow-y: auto; transform: translateY(30px) scale(0.98); transition: transform 0.3s ease; }
+    .modal.active .modal-box { transform: translateY(0) scale(1); }
+    .modal-img { height: 260px; position: relative; overflow: hidden; border-radius: 12px 12px 0 0; background: var(--black); }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--yellow); }
+    .modal-close { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; background: rgba(0,0,0,0.45); border: none; border-radius: 50%; color: white; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 3; transition: background 0.2s; }
+    .modal-close:hover { background: rgba(0,0,0,0.7); }
+    .modal-body { padding: 2rem; }
+    .modal-price { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 1.05rem; padding: 0.3rem 0.9rem; border-radius: 4px; margin-bottom: 0.75rem; }
+    .modal-title { font-size: 1.75rem; font-weight: 900; color: var(--black); margin-bottom: 0.6rem; }
+    .modal-desc { font-size: 0.97rem; color: #555; line-height: 1.65; margin-bottom: 1.75rem; }
+    .modal-section-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.75rem; }
+    .modal-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.75rem; }
+    .modal-spec { background: var(--grey); border-radius: 6px; padding: 0.8rem 1rem; }
+    .modal-spec-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #888; margin-bottom: 0.2rem; }
+    .modal-spec-value { font-size: 0.95rem; font-weight: 700; color: var(--black); }
+    .modal-uses { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
+    .modal-use { background: var(--black); color: var(--white); font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 4px; }
+    .modal-enquire { display: block; width: 100%; background: var(--yellow); color: var(--black); border: none; padding: 1rem; font-size: 1rem; font-weight: 800; border-radius: 6px; cursor: pointer; text-align: center; transition: opacity 0.2s; }
+    .modal-enquire:hover { opacity: 0.88; }
+
+    /* FOOTER */
+    footer { background: var(--black); color: var(--white); padding: 2.5rem 2rem; text-align: center; }
+    .footer-logo { font-size: 1.3rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .footer-logo span { color: var(--yellow); }
+    footer p { font-size: 0.85rem; color: #888; margin-top: 0.4rem; }
+    .footer-div { width: 60px; height: 3px; background: var(--yellow); margin: 1rem auto; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .modal-specs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" onclick="goTo(event,'index.html')">
+      <span class="nav-logo-badge">NATCO</span>
+      <span class="nav-logo-text">Machinery Equipment &amp; Hire</span>
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="goTo(event,'index.html')">Home</a></li>
+      <li><a class="active">Equipment</a></li>
+      <li><a onclick="goTo(event,'index.html#contact')">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <div class="header-grid"></div>
+    <div class="header-content">
+      <div class="header-tag">Available Now</div>
+      <h1>Our <span>Equipment</span></h1>
+      <p>Click any item to view full specs, pricing, and availability. Call Nathan to book.</p>
+    </div>
+  </header>
+
+  <section class="equip-section">
+    <div class="equip-grid">
+
+      <div class="card" onclick="open('modal-tipper')">
+        <div class="card-img">
+          <img src="https://image.pollinations.ai/prompt/heavy%20duty%20hydraulic%20tipper%20trailer%20construction%20hire%20equipment%20professional%20photo%20realistic?width=640&height=440&nologo=true&seed=101" alt="Tipper Trailer" loading="lazy" />
+          <div class="card-img-overlay"></div>
+          <div class="card-price-badge">$150 / day</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Tipper Trailer</div>
+          <div class="card-desc">Heavy-duty hydraulic tipper for soil, gravel, sand, and construction material transport.</div>
+          <div class="card-tags"><span class="card-tag">2.5T Payload</span><span class="card-tag">4.2m × 2.1m</span><span class="card-tag">Hydraulic</span></div>
+          <div class="card-footer"><span class="card-footer-text">View Details</span><div class="card-arrow">→</div></div>
+        </div>
+      </div>
+
+      <div class="card" onclick="open('modal-car')">
+        <div class="card-img">
+          <img src="https://image.pollinations.ai/prompt/tandem%20car%20carrier%20trailer%20loading%20ramps%20vehicle%20transport%20hire%20professional%20photo%20realistic?width=640&height=440&nologo=true&seed=202" alt="Car Trailer" loading="lazy" />
+          <div class="card-img-overlay"></div>
+          <div class="card-price-badge">$150 / day</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Car Trailer</div>
+          <div class="card-desc">Tandem car carrier with drive-on loading ramps and tie-down rails for safe transport.</div>
+          <div class="card-tags"><span class="card-tag">2.5T Cap.</span><span class="card-tag">5.0m × 2.1m</span><span class="card-tag">Drive-On</span></div>
+          <div class="card-footer"><span class="card-footer-text">View Details</span><div class="card-arrow">→</div></div>
+        </div>
+      </div>
+
+      <div class="card" onclick="open('modal-puller')">
+        <div class="card-img">
+          <img src="https://image.pollinations.ai/prompt/diesel%20powered%20trailer%20mover%20machine%20yellow%20heavy%20equipment%20industrial%20yard%20professional%20photo?width=640&height=440&nologo=true&seed=303" alt="Trailer Puller" loading="lazy" />
+          <div class="card-img-overlay"></div>
+          <div class="card-price-badge">$165 / day</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">2.5 Ton Trailer Puller</div>
+          <div class="card-desc">Diesel-powered mover for repositioning heavy trailers in tight spaces and yards.</div>
+          <div class="card-tags"><span class="card-tag">2.5T Pull</span><span class="card-tag">Diesel</span><span class="card-tag">Hydraulic Drive</span></div>
+          <div class="card-footer"><span class="card-footer-text">View Details</span><div class="card-arrow">→</div></div>
+        </div>
+      </div>
+
+      <div class="card" onclick="open('modal-roller')">
+        <div class="card-img">
+          <img src="https://image.pollinations.ai/prompt/single%20drum%20vibratory%20road%20roller%20compactor%20construction%20equipment%20professional%20photo%20realistic?width=640&height=440&nologo=true&seed=404" alt="Finishing Roller" loading="lazy" />
+          <div class="card-img-overlay"></div>
+          <div class="card-price-badge">$300 / day</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Finishing Roller (2.5 Ton)</div>
+          <div class="card-desc">Single drum vibratory roller for compacting gravel driveways, asphalt, and soil surfaces.</div>
+          <div class="card-tags"><span class="card-tag">2.5T</span><span class="card-tag">1,300mm Drum</span><span class="card-tag">Vibratory</span></div>
+          <div class="card-footer"><span class="card-footer-text">View Details</span><div class="card-arrow">→</div></div>
+        </div>
+      </div>
+
+      <div class="card" onclick="open('modal-cage')">
+        <div class="card-img">
+          <img src="https://image.pollinations.ai/prompt/small%20utility%20cage%20trailer%206x4%20removable%20sides%20garden%20trailer%20hire%20professional%20photo%20realistic?width=640&height=440&nologo=true&seed=505" alt="Cage Trailer" loading="lazy" />
+          <div class="card-img-overlay"></div>
+          <div class="card-price-badge">$75 / day</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">6x4 Cage Trailer</div>
+          <div class="card-desc">Versatile cage trailer with removable side rails for green waste, furniture, and bulk loads.</div>
+          <div class="card-tags"><span class="card-tag">750kg GVM</span><span class="card-tag">1.8m × 1.2m</span><span class="card-tag">Cage Sides</span></div>
+          <div class="card-footer"><span class="card-footer-text">View Details</span><div class="card-arrow">→</div></div>
+        </div>
+      </div>
+
+      <div class="card" onclick="open('modal-excavator')">
+        <div class="card-img">
+          <img src="https://image.pollinations.ai/prompt/compact%20mini%20excavator%201.7%20ton%20rubber%20tracks%20construction%20site%20landscaping%20professional%20photo%20realistic?width=640&height=440&nologo=true&seed=606" alt="Mini Excavator" loading="lazy" />
+          <div class="card-img-overlay"></div>
+          <div class="card-price-badge">POA</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">1.7 Ton Excavator</div>
+          <div class="card-desc">Compact rubber-tracked mini excavator for trenching, landscaping, and tight access sites.</div>
+          <div class="card-tags"><span class="card-tag">1.7T</span><span class="card-tag">2.3m Dig Depth</span><span class="card-tag">Rubber Tracks</span></div>
+          <div class="card-footer"><span class="card-footer-text">View Details</span><div class="card-arrow">→</div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL: Tipper Trailer -->
+  <div class="modal" id="modal-tipper" onclick="handleBg(event,'modal-tipper')">
+    <div class="modal-box">
+      <div class="modal-img">
+        <img src="https://image.pollinations.ai/prompt/heavy%20duty%20hydraulic%20tipper%20trailer%20construction%20hire%20equipment%20professional%20photo%20realistic?width=800&height=520&nologo=true&seed=101" alt="Tipper Trailer" />
+        <button class="modal-close" onclick="close('modal-tipper')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-price">$150 / day</div>
+        <h2 class="modal-title">Tipper Trailer</h2>
+        <p class="modal-desc">Our heavy-duty hydraulic tipper is ideal for any earthmoving or material transport job. The hydraulic tip mechanism means one person can unload quickly and safely — no shovelling required.</p>
+        <div class="modal-section-label">Specifications</div>
+        <div class="modal-specs">
+          <div class="modal-spec"><div class="modal-spec-label">Payload Capacity</div><div class="modal-spec-value">2.5 Tonne</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Bed Size</div><div class="modal-spec-value">4.2m × 2.1m</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">GVM</div><div class="modal-spec-value">3,500kg</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Tow Coupling</div><div class="modal-spec-value">50mm Ball</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Tip Mechanism</div><div class="modal-spec-value">Hydraulic</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Lights</div><div class="modal-spec-value">LED + Safety Chains</div></div>
+        </div>
+        <div class="modal-section-label">Best Used For</div>
+        <div class="modal-uses"><span class="modal-use">Soil & Gravel</span><span class="modal-use">Sand Transport</span><span class="modal-use">Demolition Waste</span><span class="modal-use">Garden Supplies</span><span class="modal-use">Construction Material</span></div>
+        <button class="modal-enquire" onclick="goTo(event,'index.html#contact')">Enquire Now →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Car Trailer -->
+  <div class="modal" id="modal-car" onclick="handleBg(event,'modal-car')">
+    <div class="modal-box">
+      <div class="modal-img">
+        <img src="https://image.pollinations.ai/prompt/tandem%20car%20carrier%20trailer%20loading%20ramps%20vehicle%20transport%20hire%20professional%20photo%20realistic?width=800&height=520&nologo=true&seed=202" alt="Car Trailer" />
+        <button class="modal-close" onclick="close('modal-car')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-price">$150 / day</div>
+        <h2 class="modal-title">Car Trailer</h2>
+        <p class="modal-desc">Our tandem car carrier trailer suits most vehicles. Features drive-on/drive-off ramps and multiple tie-down anchor points for a secure, confident transport experience.</p>
+        <div class="modal-section-label">Specifications</div>
+        <div class="modal-specs">
+          <div class="modal-spec"><div class="modal-spec-label">Load Capacity</div><div class="modal-spec-value">Up to 2.5 Tonne</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Deck Size</div><div class="modal-spec-value">5.0m × 2.1m</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Axles</div><div class="modal-spec-value">Tandem</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Tow Coupling</div><div class="modal-spec-value">50mm Ball</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Loading</div><div class="modal-spec-value">Drive-On Ramps</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Tie-Downs</div><div class="modal-spec-value">4 × D-Ring Rails</div></div>
+        </div>
+        <div class="modal-section-label">Best Used For</div>
+        <div class="modal-uses"><span class="modal-use">Car Transport</span><span class="modal-use">Quad Bikes & ATVs</span><span class="modal-use">Small Machinery</span><span class="modal-use">Ride-On Mowers</span></div>
+        <button class="modal-enquire" onclick="goTo(event,'index.html#contact')">Enquire Now →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Trailer Puller -->
+  <div class="modal" id="modal-puller" onclick="handleBg(event,'modal-puller')">
+    <div class="modal-box">
+      <div class="modal-img">
+        <img src="https://image.pollinations.ai/prompt/diesel%20powered%20trailer%20mover%20machine%20yellow%20heavy%20equipment%20industrial%20yard%20professional%20photo?width=800&height=520&nologo=true&seed=303" alt="Trailer Puller" />
+        <button class="modal-close" onclick="close('modal-puller')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-price">$165 / day</div>
+        <h2 class="modal-title">2.5 Ton Trailer Puller</h2>
+        <p class="modal-desc">Powerful diesel-powered trailer mover capable of shifting loads up to 2.5 tonnes. Perfect for moving trailers in tight spaces where a tow vehicle can't reach.</p>
+        <div class="modal-section-label">Specifications</div>
+        <div class="modal-specs">
+          <div class="modal-spec"><div class="modal-spec-label">Pulling Capacity</div><div class="modal-spec-value">2.5 Tonne</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Engine</div><div class="modal-spec-value">4-Stroke Diesel</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Drive System</div><div class="modal-spec-value">Hydraulic</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Coupling</div><div class="modal-spec-value">50mm Ball Hitch</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Speed</div><div class="modal-spec-value">Variable</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Safety</div><div class="modal-spec-value">Dead-Man Switch</div></div>
+        </div>
+        <div class="modal-section-label">Best Used For</div>
+        <div class="modal-uses"><span class="modal-use">Shed & Yard Maneuvering</span><span class="modal-use">Tight Access Sites</span><span class="modal-use">Moving Caravans</span><span class="modal-use">Boat Trailer Positioning</span></div>
+        <button class="modal-enquire" onclick="goTo(event,'index.html#contact')">Enquire Now →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Finishing Roller -->
+  <div class="modal" id="modal-roller" onclick="handleBg(event,'modal-roller')">
+    <div class="modal-box">
+      <div class="modal-img">
+        <img src="https://image.pollinations.ai/prompt/single%20drum%20vibratory%20road%20roller%20compactor%20construction%20equipment%20professional%20photo%20realistic?width=800&height=520&nologo=true&seed=404" alt="Finishing Roller" />
+        <button class="modal-close" onclick="close('modal-roller')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-price">$300 / day</div>
+        <h2 class="modal-title">Finishing Roller (2.5 Ton)</h2>
+        <p class="modal-desc">Professional single-drum vibratory roller for a smooth, solid compacted finish. Saves thousands compared to contractor hire — ideal for driveways, paths, and hardstand areas.</p>
+        <div class="modal-section-label">Specifications</div>
+        <div class="modal-specs">
+          <div class="modal-spec"><div class="modal-spec-label">Operating Weight</div><div class="modal-spec-value">2.5 Tonne</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Drum Width</div><div class="modal-spec-value">1,300mm</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Vibration Freq.</div><div class="modal-spec-value">55 Hz</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Engine</div><div class="modal-spec-value">Diesel</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Drive</div><div class="modal-spec-value">Articulated</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Safety Frame</div><div class="modal-spec-value">ROPS Certified</div></div>
+        </div>
+        <div class="modal-section-label">Best Used For</div>
+        <div class="modal-uses"><span class="modal-use">Gravel Driveways</span><span class="modal-use">Asphalt Compaction</span><span class="modal-use">Soil Compaction</span><span class="modal-use">Pathway Finishing</span><span class="modal-use">Hardstand Areas</span></div>
+        <button class="modal-enquire" onclick="goTo(event,'index.html#contact')">Enquire Now →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Cage Trailer -->
+  <div class="modal" id="modal-cage" onclick="handleBg(event,'modal-cage')">
+    <div class="modal-box">
+      <div class="modal-img">
+        <img src="https://image.pollinations.ai/prompt/small%20utility%20cage%20trailer%206x4%20removable%20sides%20garden%20trailer%20hire%20professional%20photo%20realistic?width=800&height=520&nologo=true&seed=505" alt="Cage Trailer" />
+        <button class="modal-close" onclick="close('modal-cage')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-price">$75 / day</div>
+        <h2 class="modal-title">6x4 Cage Trailer</h2>
+        <p class="modal-desc">Our most popular and affordable option. The 6x4 cage trailer is incredibly versatile — perfect for household clean-ups, green waste, moving furniture, and garden supplies.</p>
+        <div class="modal-section-label">Specifications</div>
+        <div class="modal-specs">
+          <div class="modal-spec"><div class="modal-spec-label">Deck Size</div><div class="modal-spec-value">1.8m × 1.2m (6×4)</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Cage Height</div><div class="modal-spec-value">600mm Removable</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">GVM</div><div class="modal-spec-value">750kg</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Tow Coupling</div><div class="modal-spec-value">50mm Ball</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Side Rails</div><div class="modal-spec-value">Fully Removable</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Lights</div><div class="modal-spec-value">LED Tail Lights</div></div>
+        </div>
+        <div class="modal-section-label">Best Used For</div>
+        <div class="modal-uses"><span class="modal-use">Green Waste</span><span class="modal-use">Furniture Removal</span><span class="modal-use">Household Junk</span><span class="modal-use">Garden Supplies</span><span class="modal-use">Firewood</span></div>
+        <button class="modal-enquire" onclick="goTo(event,'index.html#contact')">Enquire Now →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Excavator -->
+  <div class="modal" id="modal-excavator" onclick="handleBg(event,'modal-excavator')">
+    <div class="modal-box">
+      <div class="modal-img">
+        <img src="https://image.pollinations.ai/prompt/compact%20mini%20excavator%201.7%20ton%20rubber%20tracks%20construction%20site%20landscaping%20professional%20photo%20realistic?width=800&height=520&nologo=true&seed=606" alt="Mini Excavator" />
+        <button class="modal-close" onclick="close('modal-excavator')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-price">Price on Application</div>
+        <h2 class="modal-title">1.7 Ton Excavator</h2>
+        <p class="modal-desc">Our compact rubber-tracked mini excavator is powerful enough for real earthmoving work, yet small enough to access confined areas. Contact Nathan directly for pricing and availability.</p>
+        <div class="modal-section-label">Specifications</div>
+        <div class="modal-specs">
+          <div class="modal-spec"><div class="modal-spec-label">Operating Weight</div><div class="modal-spec-value">1.7 Tonne</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Max Dig Depth</div><div class="modal-spec-value">2,340mm</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Max Reach</div><div class="modal-spec-value">3,800mm</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Bucket Width</div><div class="modal-spec-value">400mm</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Engine Power</div><div class="modal-spec-value">11.8 kW Diesel</div></div>
+          <div class="modal-spec"><div class="modal-spec-label">Tracks</div><div class="modal-spec-value">Rubber (Low Impact)</div></div>
+        </div>
+        <div class="modal-section-label">Best Used For</div>
+        <div class="modal-uses"><span class="modal-use">Trenching</span><span class="modal-use">Landscaping</span><span class="modal-use">Post Holes</span><span class="modal-use">Tight Access Sites</span><span class="modal-use">Stump Removal</span><span class="modal-use">Drainage Work</span></div>
+        <button class="modal-enquire" onclick="goTo(event,'index.html#contact')">Enquire About Pricing →</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><span>NATCO</span> Machinery Equipment &amp; Hire</div>
+    <div class="footer-div"></div>
+    <p>Nathan Bujayer &nbsp;·&nbsp; <a href="tel:0428990169" style="color:#888;text-decoration:none">0428 990 169</a> &nbsp;·&nbsp; <a href="mailto:Nateo007@outlook.com" style="color:#888;text-decoration:none">Nateo007@outlook.com</a></p>
+    <p style="margin-top:0.4rem">309 Rokonia Rd, Koongal QLD 4701</p>
+    <p style="margin-top:1.2rem">&copy; 2026 NATCO Machinery Equipment &amp; Hire. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function goTo(e, url) {
+      if (e) e.preventDefault();
+      document.body.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      document.body.style.opacity = '0';
+      document.body.style.transform = 'translateX(40px)';
+      setTimeout(() => window.location.href = url, 350);
+    }
+
+    function open(id) {
+      const m = document.getElementById(id);
+      m.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add('active')));
+    }
+
+    function close(id) {
+      const m = document.getElementById(id);
+      m.classList.remove('active');
+      setTimeout(() => { m.classList.remove('open'); document.body.style.overflow = ''; }, 300);
+    }
+
+    function handleBg(e, id) {
+      if (e.target === document.getElementById(id)) close(id);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(m => close(m.id));
+    });
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card').forEach((c, i) => {
+      c.dataset.delay = i * 80;
+      obs.observe(c);
+    });
+  </script>
+</body>
+</html>
