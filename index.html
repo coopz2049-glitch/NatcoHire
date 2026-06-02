@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NATCO Machinery Equipment & Hire</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #FFD100;
+      --black: #111111;
+      --dark: #1a1a1a;
+      --white: #ffffff;
+      --grey: #f5f5f5;
+      --text-dark: #222222;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-badge {
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 900;
+      font-size: 1.1rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .nav-logo-text {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black);
+      color: var(--white);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 6px;
+      background: var(--yellow);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span { color: var(--yellow); }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #cccccc;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.85rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+
+    .hero-cta:hover { opacity: 0.88; }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--yellow);
+      padding: 0.9rem 2rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--black);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 4rem 2rem; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+      line-height: 1.15;
+    }
+
+    .section-sub {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+
+    /* ── EQUIPMENT GRID ── */
+    #equipment { background: var(--grey); }
+
+    .equipment-header { text-align: center; }
+    .equipment-header .section-sub { margin-left: auto; margin-right: auto; }
+
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+    }
+
+    .card-icon {
+      background: var(--black);
+      padding: 2rem 1.5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .card-icon::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--yellow);
+    }
+
+    .card-body {
+      padding: 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 0.35rem;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 1.1rem;
+    }
+
+    .card-price {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.3rem;
+      border-top: 2px solid var(--grey);
+      padding-top: 1rem;
+    }
+
+    .price-amount {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .price-currency {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.15rem;
+    }
+
+    .price-period {
+      font-size: 0.82rem;
+      color: #888;
+      margin-bottom: 0.2rem;
+    }
+
+    .price-poa {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--yellow);
+      background: var(--black);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+    }
+
+    #how .section-title { color: var(--white); }
+    #how .section-sub { color: #aaa; margin-left: auto; margin-right: auto; }
+
+    .steps {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 180px;
+      max-width: 220px;
+    }
+
+    .step-num {
+      width: 52px;
+      height: 52px;
+      background: var(--yellow);
+      color: var(--black);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      margin: 0 auto 1rem;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--white);
+    }
+
+    .step p { font-size: 0.88rem; color: #aaa; line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-grid .full { grid-column: 1 / -1; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      background: var(--white);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--yellow);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      background: var(--yellow);
+      color: var(--black);
+      border: none;
+      padding: 0.9rem 2.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.4px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-submit:hover { opacity: 0.88; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-logo span { color: var(--yellow); }
+
+    footer p {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 0.4rem;
+    }
+
+    .footer-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--yellow);
+      margin: 1rem auto;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-grid .full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-badge">NATCO</span>
+      <span class="nav-logo-text">Machinery Equipment &amp; Hire</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#equipment">Equipment</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-tag">Professional Equipment Hire</div>
+    <h1>NATCO <span>Machinery</span><br />Equipment &amp; Hire</h1>
+    <p>Reliable machinery and trailer hire for contractors, farmers, and everyday Australians. Quality gear at competitive rates.</p>
+    <a href="#equipment" class="hero-cta">View All Equipment</a>
+  </header>
+
+  <!-- STRIP -->
+  <div class="strip">
+    No long-term contracts &nbsp;·&nbsp; Daily hire rates &nbsp;·&nbsp; Ready when you need it
+  </div>
+
+  <!-- EQUIPMENT -->
+  <section id="equipment">
+    <div class="equipment-header">
+      <div class="section-label">What We Hire</div>
+      <h2 class="section-title">Our Equipment</h2>
+      <p class="section-sub">All pricing is per day. Contact us for weekly rates or multi-item packages.</p>
+    </div>
+
+    <div class="equipment-grid">
+
+      <div class="card">
+        <div class="card-icon">🚛</div>
+        <div class="card-body">
+          <div class="card-title">Tipper Trailer</div>
+          <div class="card-desc">Heavy-duty tipper trailer ideal for soil, gravel, sand, and general construction material transport.</div>
+          <div class="card-price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">150</span>
+            <span class="price-period">/ day</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🚗</div>
+        <div class="card-body">
+          <div class="card-title">Car Trailer</div>
+          <div class="card-desc">Sturdy car trailer suitable for vehicle transport, moving equipment, or general-purpose hauling.</div>
+          <div class="card-price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">150</span>
+            <span class="price-period">/ day</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🔩</div>
+        <div class="card-body">
+          <div class="card-title">2.5 Ton Trailer Puller</div>
+          <div class="card-desc">Powerful 2.5 ton trailer puller with the capacity to move large loads with ease and reliability.</div>
+          <div class="card-price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">165</span>
+            <span class="price-period">/ day</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🛞</div>
+        <div class="card-body">
+          <div class="card-title">Finishing Roller (2.5 Ton)</div>
+          <div class="card-desc">Professional 2.5 ton finishing roller for compacting gravel driveways, asphalt, and soil surfaces.</div>
+          <div class="card-price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">300</span>
+            <span class="price-period">/ day</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🪤</div>
+        <div class="card-body">
+          <div class="card-title">6x4 Cage Trailer</div>
+          <div class="card-desc">Versatile 6x4 cage trailer with secure side rails. Great for green waste, furniture, and bulk material.</div>
+          <div class="card-price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">75</span>
+            <span class="price-period">/ day</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🏗️</div>
+        <div class="card-body">
+          <div class="card-title">1.7 Ton Excavator</div>
+          <div class="card-desc">Compact 1.7 ton mini excavator for digging trenches, landscaping, post holes, and tight access sites.</div>
+          <div class="card-price">
+            <span class="price-poa">POA</span>
+            <span class="price-period" style="margin-left:0.5rem;">Contact for pricing</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-label" style="text-align:center">Simple Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Getting your equipment is quick and easy.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Choose Your Gear</h3>
+        <p>Browse our equipment list and pick what you need for your job.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Get in Touch</h3>
+        <p>Call us or fill out the enquiry form to confirm availability and dates.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Pick Up &amp; Go</h3>
+        <p>Collect the equipment on your agreed date and get the job done.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Return</h3>
+        <p>Drop it back when you're finished — as easy as that.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Make an Enquiry</h2>
+      <p class="section-sub">Fill in the form below and we'll get back to you as soon as possible.</p>
+
+      <form>
+        <div class="contact-grid">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="John Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="04xx xxx xxx" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="equipment">Equipment Needed</label>
+            <select id="equipment">
+              <option value="">Select equipment...</option>
+              <option>Tipper Trailer — $150/day</option>
+              <option>Car Trailer — $150/day</option>
+              <option>2.5 Ton Trailer Puller — $165/day</option>
+              <option>Finishing Roller (2.5 Ton) — $300/day</option>
+              <option>6x4 Cage Trailer — $75/day</option>
+              <option>1.7 Ton Excavator — POA</option>
+              <option>Multiple Items</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="dates">Preferred Hire Dates</label>
+            <input type="text" id="dates" placeholder="e.g. 10 June – 12 June 2026" />
+          </div>
+          <div class="form-group full">
+            <label for="message">Additional Details</label>
+            <textarea id="message" placeholder="Tell us more about your job or any questions you have..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Send Enquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span>NATCO</span> Machinery Equipment &amp; Hire</div>
+    <div class="footer-divider"></div>
+    <p>Quality equipment hire for every job.</p>
+    <p style="margin-top:1.2rem;">&copy; 2026 NATCO Machinery Equipment &amp; Hire. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
