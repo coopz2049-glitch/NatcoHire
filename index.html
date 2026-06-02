@@ -328,10 +328,9 @@
   <script>
     function goTo(e, url) {
       if (e) e.preventDefault();
-      document.body.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      document.body.style.transition = 'opacity 0.18s ease';
       document.body.style.opacity = '0';
-      document.body.style.transform = 'translateX(-40px)';
-      setTimeout(() => window.location.href = url, 350);
+      setTimeout(() => window.location.href = url, 180);
     }
 
     const observer = new IntersectionObserver(entries => {

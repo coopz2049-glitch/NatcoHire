@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tipper Trailer — NATCO</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --yellow: #FFD100; --black: #111111; --white: #ffffff; --grey: #f5f5f5; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; background: var(--white); animation: pageIn 0.25s ease both; }
+    @keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+    nav { background: var(--black); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; position: sticky; top: 0; z-index: 100; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; cursor: pointer; }
+    .nav-logo-badge { background: var(--yellow); color: var(--black); font-weight: 900; font-size: 1.1rem; padding: 0.25rem 0.55rem; border-radius: 4px; }
+    .nav-logo-text { color: var(--white); font-size: 1rem; font-weight: 600; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { color: var(--white); text-decoration: none; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--yellow); }
+    .product-hero { background: var(--black); padding: 3rem 2rem; position: relative; }
+    .product-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--yellow); }
+    .back-btn { display: inline-flex; align-items: center; gap: 0.4rem; color: #888; font-size: 0.82rem; font-weight: 600; cursor: pointer; margin-bottom: 1.5rem; transition: color 0.2s; border: none; background: none; }
+    .back-btn:hover { color: var(--yellow); }
+    .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .hero-img { background: #161616; border-radius: 10px; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; border: 2px solid #222; }
+    .hero-img-icon { font-size: 2.5rem; opacity: 0.2; }
+    .hero-img-text { color: #555; font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
+    .hero-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.5rem; }
+    .hero-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; color: var(--white); margin-bottom: 0.75rem; line-height: 1.1; }
+    .hero-price { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 1.2rem; padding: 0.35rem 1rem; border-radius: 4px; margin-bottom: 1rem; }
+    .hero-desc { color: #bbb; font-size: 0.97rem; line-height: 1.65; margin-bottom: 1.5rem; }
+    .enquire-btn { background: var(--yellow); color: var(--black); border: none; padding: 0.9rem 2rem; font-size: 1rem; font-weight: 800; border-radius: 4px; cursor: pointer; transition: opacity 0.2s; }
+    .enquire-btn:hover { opacity: 0.88; }
+    .content { max-width: 1100px; margin: 0 auto; padding: 3.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .section-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.75rem; }
+    .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .spec { background: var(--grey); border-radius: 6px; padding: 0.8rem 1rem; }
+    .spec-label { font-size: 0.67rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #999; margin-bottom: 0.2rem; }
+    .spec-value { font-size: 0.95rem; font-weight: 700; color: var(--black); }
+    .uses-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .use-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.95rem; color: #333; }
+    .use-dot { width: 8px; height: 8px; background: var(--yellow); border-radius: 50%; flex-shrink: 0; }
+    footer { background: var(--black); color: var(--white); padding: 2rem 2rem; text-align: center; }
+    .footer-logo { font-size: 1.2rem; font-weight: 900; }
+    .footer-logo span { color: var(--yellow); }
+    footer p { font-size: 0.83rem; color: #888; margin-top: 0.4rem; }
+    .footer-div { width: 50px; height: 3px; background: var(--yellow); margin: 0.8rem auto; }
+    @media (max-width: 760px) { .hero-inner, .content { grid-template-columns: 1fr; } .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" onclick="goTo(event,'index.html')">
+      <span class="nav-logo-badge">NATCO</span>
+      <span class="nav-logo-text">Machinery Equipment &amp; Hire</span>
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="goTo(event,'index.html')">Home</a></li>
+      <li><a onclick="goTo(event,'equipment.html')">Equipment</a></li>
+      <li><a onclick="goTo(event,'index.html#contact')">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="product-hero">
+    <div style="max-width:1100px;margin:0 auto">
+      <button class="back-btn" onclick="goTo(event,'equipment.html')">← Back to Equipment</button>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-img">
+        <div class="hero-img-icon">📷</div>
+        <div class="hero-img-text">Image Coming Soon</div>
+      </div>
+      <div>
+        <div class="hero-label">Trailer Hire</div>
+        <h1 class="hero-title">Tipper Trailer</h1>
+        <div class="hero-price">$150 / day</div>
+        <p class="hero-desc">Heavy-duty hydraulic tipper trailer ideal for soil, gravel, sand, and general construction material transport. The hydraulic tip mechanism means one person can unload quickly and safely — no shovelling required.</p>
+        <button class="enquire-btn" onclick="goTo(event,'index.html#contact')">Enquire Now →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="content">
+    <div>
+      <div class="section-label">Specifications</div>
+      <div class="specs-grid">
+        <div class="spec"><div class="spec-label">Payload Capacity</div><div class="spec-value">2.5 Tonne</div></div>
+        <div class="spec"><div class="spec-label">Bed Size</div><div class="spec-value">4.2m × 2.1m</div></div>
+        <div class="spec"><div class="spec-label">GVM</div><div class="spec-value">3,500kg</div></div>
+        <div class="spec"><div class="spec-label">Tow Coupling</div><div class="spec-value">50mm Ball</div></div>
+        <div class="spec"><div class="spec-label">Tip Mechanism</div><div class="spec-value">Hydraulic</div></div>
+        <div class="spec"><div class="spec-label">Lights</div><div class="spec-value">LED + Safety Chains</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Best Used For</div>
+      <div class="uses-list">
+        <div class="use-item"><div class="use-dot"></div>Soil, gravel &amp; sand transport</div>
+        <div class="use-item"><div class="use-dot"></div>Demolition and construction waste</div>
+        <div class="use-item"><div class="use-dot"></div>Garden supplies and mulch</div>
+        <div class="use-item"><div class="use-dot"></div>Landscaping projects</div>
+        <div class="use-item"><div class="use-dot"></div>Farm &amp; rural material transport</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><span>NATCO</span> Machinery Equipment &amp; Hire</div>
+    <div class="footer-div"></div>
+    <p>Nathan Bujayer &nbsp;·&nbsp; <a href="tel:0428990169" style="color:#888;text-decoration:none">0428 990 169</a></p>
+    <p style="margin-top:1rem">&copy; 2026 NATCO Machinery Equipment &amp; Hire.</p>
+  </footer>
+
+  <script>
+    function goTo(e, url) {
+      if (e) e.preventDefault();
+      document.body.style.transition = 'opacity 0.18s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => window.location.href = url, 180);
+    }
+  </script>
+</body>
+</html>
