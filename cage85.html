@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finishing Roller — NATCO</title>
+  <title>8x5 Fully Cage — NATCO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -26,8 +26,9 @@
     .back-btn { display: inline-flex; align-items: center; gap: 0.4rem; color: #888; font-size: 0.82rem; font-weight: 600; cursor: pointer; margin-bottom: 1.5rem; transition: color 0.2s; border: none; background: none; }
     .back-btn:hover { color: var(--yellow); }
     .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-    .hero-img { background: #161616; border-radius: 10px; height: 300px; overflow: hidden; border: 2px solid #2a2a2a; }
+    .hero-img { background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%); border-radius: 10px; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; border: 2px solid #2a2a2a; overflow: hidden; }
     .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-placeholder-svg { width: 110px; height: 66px; fill: var(--yellow); opacity: 0.13; }
     .hero-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.5rem; }
     .hero-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; color: var(--white); margin-bottom: 0.75rem; line-height: 1.1; }
     .hero-price { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 1.2rem; padding: 0.35rem 1rem; border-radius: 4px; margin-bottom: 1rem; }
@@ -77,12 +78,25 @@
   <section class="product-hero">
     <div style="max-width:1100px;margin:0 auto"><button class="back-btn" onclick="goTo(event,'equipment.html')">← Back to Equipment</button></div>
     <div class="hero-inner">
-      <div class="hero-img"><img src="roller.jpg" alt="Finishing Roller 2.5 Ton" /></div>
+      <div class="hero-img">
+        <svg class="hero-placeholder-svg" viewBox="0 0 100 60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="34" width="64" height="4"/>
+          <rect x="3" y="10" width="5" height="28"/>
+          <rect x="62" y="10" width="5" height="28"/>
+          <rect x="3" y="10" width="64" height="4"/>
+          <rect x="22" y="10" width="4" height="28"/>
+          <rect x="42" y="10" width="4" height="28"/>
+          <rect x="67" y="24" width="18" height="5"/>
+          <circle cx="17" cy="46" r="8"/>
+          <circle cx="51" cy="46" r="8"/>
+          <circle cx="84" cy="28" r="3"/>
+        </svg>
+      </div>
       <div>
-        <div class="hero-label">Equipment Hire</div>
-        <h1 class="hero-title">Finishing Roller<br />(2.5 Ton)</h1>
-        <div class="hero-price">$300 / day</div>
-        <p class="hero-desc">Professional single-drum vibratory roller for compacting surfaces to a smooth, solid finish. Saves thousands compared to hiring a contractor — ideal for driveways, paths, and hardstand areas.</p>
+        <div class="hero-label">Trailer Hire</div>
+        <h1 class="hero-title">8x5 Fully Cage</h1>
+        <div class="hero-price">$100 / day</div>
+        <p class="hero-desc">A step up in size for bigger jobs. The 8x5 fully caged trailer handles large loads of green waste, furniture, soil, and more. Full cage sides give you confidence your load is secure on the road.</p>
         <div class="hero-actions">
           <button class="enquire-btn" onclick="goTo(event,'index.html#contact')">Enquire Now →</button>
           <a href="tel:0428990169" class="call-btn">Call Nathan</a>
@@ -94,22 +108,22 @@
     <div>
       <div class="section-label">Specifications</div>
       <div class="specs-grid">
-        <div class="spec"><div class="spec-label">Operating Weight</div><div class="spec-value">2.5 Tonne</div></div>
-        <div class="spec"><div class="spec-label">Drum Width</div><div class="spec-value">1,300mm</div></div>
-        <div class="spec"><div class="spec-label">Vibration Freq.</div><div class="spec-value">55 Hz</div></div>
-        <div class="spec"><div class="spec-label">Engine</div><div class="spec-value">Diesel</div></div>
-        <div class="spec"><div class="spec-label">Drive</div><div class="spec-value">Articulated</div></div>
-        <div class="spec"><div class="spec-label">Safety Frame</div><div class="spec-value">Chain and Racket Tie Down Certified</div></div>
+        <div class="spec"><div class="spec-label">Deck Size</div><div class="spec-value">2.4m × 1.5m (8×5)</div></div>
+        <div class="spec"><div class="spec-label">Cage Sides</div><div class="spec-value">Full Height</div></div>
+        <div class="spec"><div class="spec-label">Tow Coupling</div><div class="spec-value">50mm Ball</div></div>
+        <div class="spec"><div class="spec-label">Side Rails</div><div class="spec-value">Full Cage</div></div>
+        <div class="spec"><div class="spec-label">Lights</div><div class="spec-value">LED Tail Lights</div></div>
+        <div class="spec"><div class="spec-label">Safety</div><div class="spec-value">Safety Chains</div></div>
       </div>
     </div>
     <div>
       <div class="section-label">Best Used For</div>
       <div class="uses-list">
-        <div class="use-item"><div class="use-dot"></div>Gravel driveway compaction</div>
-        <div class="use-item"><div class="use-dot"></div>Asphalt patching &amp; finishing</div>
-        <div class="use-item"><div class="use-dot"></div>Soil compaction for foundations</div>
-        <div class="use-item"><div class="use-dot"></div>Pathway &amp; hardstand areas</div>
-        <div class="use-item"><div class="use-dot"></div>Subdivision &amp; civil works</div>
+        <div class="use-item"><div class="use-dot"></div>Large green waste &amp; garden clean-ups</div>
+        <div class="use-item"><div class="use-dot"></div>Furniture &amp; household removals</div>
+        <div class="use-item"><div class="use-dot"></div>Bulk rubbish &amp; junk removal</div>
+        <div class="use-item"><div class="use-dot"></div>Garden supplies, soil &amp; mulch</div>
+        <div class="use-item"><div class="use-dot"></div>Farm &amp; rural use</div>
       </div>
     </div>
   </div>
