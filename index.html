@@ -105,13 +105,15 @@
     #reviews { background: var(--grey); }
     #reviews .section-label, #reviews .section-title { text-align: center; display: block; }
     #reviews .section-sub { margin: 0 auto 2.5rem; text-align: center; }
-    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; max-width: 1100px; margin: 0 auto; }
-    .review-card { background: var(--white); border-radius: 8px; padding: 1.8rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: relative; }
-    .review-card:nth-child(1) { transition-delay: 0.05s; }
-    .review-card:nth-child(2) { transition-delay: 0.15s; }
-    .review-card:nth-child(3) { transition-delay: 0.25s; }
-    .review-card:nth-child(4) { transition-delay: 0.1s; }
-    .review-card:nth-child(5) { transition-delay: 0.2s; }
+    .reviews-ticker { overflow: hidden; position: relative; }
+    .reviews-ticker::before, .reviews-ticker::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none; }
+    .reviews-ticker::before { left: 0; background: linear-gradient(to right, var(--grey), transparent); }
+    .reviews-ticker::after { right: 0; background: linear-gradient(to left, var(--grey), transparent); }
+    .reviews-track { display: flex; gap: 1.4rem; width: max-content; animation: scrollReviews 32s linear infinite; padding: 0.5rem 0; }
+    .reviews-track:hover { animation-play-state: paused; }
+    @keyframes scrollReviews { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .review-card { background: var(--white); border-radius: 8px; padding: 1.8rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: relative; width: 320px; flex-shrink: 0; transition: box-shadow 0.2s, transform 0.2s; }
+    .review-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.13); transform: translateY(-3px); }
     .review-stars { color: var(--yellow); font-size: 1.05rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
     .review-quote { font-size: 0.93rem; color: #444; line-height: 1.6; margin-bottom: 1.2rem; font-style: italic; }
     .review-quote::before { content: '"'; }
@@ -163,7 +165,6 @@
     @media (max-width: 900px) {
       .about-inner { grid-template-columns: 1fr; gap: 2rem; }
       .nathan-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .reviews-grid { grid-template-columns: 1fr 1fr; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
@@ -173,7 +174,6 @@
       .nav-links a { font-size: 1rem; padding: 0.5rem 0; }
       .contact-layout, .contact-grid { grid-template-columns: 1fr; }
       .contact-grid .full { grid-column: 1; }
-      .reviews-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -280,36 +280,69 @@
     <div class="section-label">What Customers Say</div>
     <h2 class="section-title">Reviews</h2>
     <p class="section-sub">Trusted by locals across the Rockhampton region.</p>
-    <div class="reviews-grid">
-      <div class="review-card aos">
-        <div class="review-badge">Verified</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">Hired the tipper trailer for a weekend job — perfect condition. Nathan had me sorted within the hour. Will definitely use again.</p>
-        <div class="review-author"><div class="review-avatar">JM</div><div><div class="review-name">Jake Morrison</div><div class="review-loc">Rockhampton, QLD</div></div></div>
-      </div>
-      <div class="review-card aos">
-        <div class="review-badge">Verified</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">Used the excavator for our landscaping project — exactly what we needed. Professional, clean and ready to go. Highly recommend.</p>
-        <div class="review-author"><div class="review-avatar">ST</div><div><div class="review-name">Sarah Thompson</div><div class="review-loc">Gracemere, QLD</div></div></div>
-      </div>
-      <div class="review-card aos">
-        <div class="review-badge">Verified</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">Nathan is an absolute legend. Honest pricing, no hidden fees, best hire place in Rocky. Equipment was ready and in great nick.</p>
-        <div class="review-author"><div class="review-avatar">DW</div><div><div class="review-name">Darren Walsh</div><div class="review-loc">Rockhampton, QLD</div></div></div>
-      </div>
-      <div class="review-card aos">
-        <div class="review-badge">Verified</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-quote">Used the finishing roller for our driveway — saved us thousands. Easy to operate and well maintained. Incredible value for money.</p>
-        <div class="review-author"><div class="review-avatar">LC</div><div><div class="review-name">Leanne Carter</div><div class="review-loc">Yeppoon, QLD</div></div></div>
-      </div>
-      <div class="review-card aos">
-        <div class="review-badge">Verified</div>
-        <div class="review-stars">★★★★☆</div>
-        <p class="review-quote">Good equipment and fair prices. The cage trailer was perfect for clearing the yard. Quick to hitch up, would hire from NATCO again.</p>
-        <div class="review-author"><div class="review-avatar">MP</div><div><div class="review-name">Mike Papadopoulos</div><div class="review-loc">Emu Park, QLD</div></div></div>
+    <div class="reviews-ticker">
+      <div class="reviews-track">
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Hired the tipper trailer for a weekend job — perfect condition. Nathan had me sorted within the hour. Will definitely use again.</p>
+          <div class="review-author"><div class="review-avatar">JM</div><div><div class="review-name">Jake Morrison</div><div class="review-loc">Rockhampton, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Used the excavator for our landscaping project — exactly what we needed. Professional, clean and ready to go. Highly recommend.</p>
+          <div class="review-author"><div class="review-avatar">ST</div><div><div class="review-name">Sarah Thompson</div><div class="review-loc">Gracemere, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Nathan is an absolute legend. Honest pricing, no hidden fees, best hire place in Rocky. Equipment was ready and in great nick.</p>
+          <div class="review-author"><div class="review-avatar">DW</div><div><div class="review-name">Darren Walsh</div><div class="review-loc">Rockhampton, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Used the finishing roller for our driveway — saved us thousands. Easy to operate and well maintained. Incredible value for money.</p>
+          <div class="review-author"><div class="review-avatar">LC</div><div><div class="review-name">Leanne Carter</div><div class="review-loc">Yeppoon, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-quote">Good equipment and fair prices. The cage trailer was perfect for clearing the yard. Quick to hitch up, would hire from NATCO again.</p>
+          <div class="review-author"><div class="review-avatar">MP</div><div><div class="review-name">Mike Papadopoulos</div><div class="review-loc">Emu Park, QLD</div></div></div>
+        </div>
+        <!-- Duplicated for seamless loop -->
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Hired the tipper trailer for a weekend job — perfect condition. Nathan had me sorted within the hour. Will definitely use again.</p>
+          <div class="review-author"><div class="review-avatar">JM</div><div><div class="review-name">Jake Morrison</div><div class="review-loc">Rockhampton, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Used the excavator for our landscaping project — exactly what we needed. Professional, clean and ready to go. Highly recommend.</p>
+          <div class="review-author"><div class="review-avatar">ST</div><div><div class="review-name">Sarah Thompson</div><div class="review-loc">Gracemere, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Nathan is an absolute legend. Honest pricing, no hidden fees, best hire place in Rocky. Equipment was ready and in great nick.</p>
+          <div class="review-author"><div class="review-avatar">DW</div><div><div class="review-name">Darren Walsh</div><div class="review-loc">Rockhampton, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">Used the finishing roller for our driveway — saved us thousands. Easy to operate and well maintained. Incredible value for money.</p>
+          <div class="review-author"><div class="review-avatar">LC</div><div><div class="review-name">Leanne Carter</div><div class="review-loc">Yeppoon, QLD</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-badge">Verified</div>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-quote">Good equipment and fair prices. The cage trailer was perfect for clearing the yard. Quick to hitch up, would hire from NATCO again.</p>
+          <div class="review-author"><div class="review-avatar">MP</div><div><div class="review-name">Mike Papadopoulos</div><div class="review-loc">Emu Park, QLD</div></div></div>
+        </div>
       </div>
     </div>
   </section>
